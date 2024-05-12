@@ -1,0 +1,553 @@
+{
+  "flights": [
+    {
+      "flight_number": "JD100",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-10T08:00:00",
+      "arrival_airport": "LAX",
+      "arrival_time": "2024-05-10T11:30:00",
+      "fare": 250,
+      "available_seats": 120
+    },
+    {
+      "flight_number": "JD101",
+      "departure_airport": "LAX",
+      "departure_time": "2024-05-10T09:00:00",
+      "arrival_airport": "SFO",
+      "arrival_time": "2024-05-10T11:30:00",
+      "fare": 230,
+      "available_seats": 110
+    },
+    {
+      "flight_number": "JD102",
+      "departure_airport": "SFO",
+      "departure_time": "2024-05-10T12:00:00",
+      "arrival_airport": "JFK",
+      "arrival_time": "2024-05-10T17:30:00",
+      "fare": 280,
+      "available_seats": 100
+    },
+    {
+      "flight_number": "JD103",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-10T10:30:00",
+      "arrival_airport": "ORD",
+      "arrival_time": "2024-05-10T13:45:00",
+      "fare": 200,
+      "available_seats": 150
+    },
+    {
+      "flight_number": "JD104",
+      "departure_airport": "ORD",
+      "departure_time": "2024-05-10T14:00:00",
+      "arrival_airport": "LAX",
+      "arrival_time": "2024-05-10T17:30:00",
+      "fare": 270,
+      "available_seats": 120
+    },
+    {
+      "flight_number": "JD105",
+      "departure_airport": "LAX",
+      "departure_time": "2024-05-10T18:00:00",
+      "arrival_airport": "JFK",
+      "arrival_time": "2024-05-10T23:30:00",
+      "fare": 300,
+      "available_seats": 100
+    },
+    {
+      "flight_number": "JD106",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-11T08:00:00",
+      "arrival_airport": "SFO",
+      "arrival_time": "2024-05-11T11:30:00",
+      "fare": 240,
+      "available_seats": 130
+    },
+    {
+      "flight_number": "JD107",
+      "departure_airport": "SFO",
+      "departure_time": "2024-05-11T12:00:00",
+      "arrival_airport": "ORD",
+      "arrival_time": "2024-05-11T17:30:00",
+      "fare": 280,
+      "available_seats": 110
+    },
+    {
+      "flight_number": "JD108",
+      "departure_airport": "ORD",
+      "departure_time": "2024-05-11T18:00:00",
+      "arrival_airport": "JFK",
+      "arrival_time": "2024-05-11T23:30:00",
+      "fare": 310,
+      "available_seats": 90
+    },
+    {
+      "flight_number": "JD109",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-12T08:30:00",
+      "arrival_airport": "LAX",
+      "arrival_time": "2024-05-12T12:00:00",
+      "fare": 280,
+      "available_seats": 120
+    },
+    {
+      "flight_number": "JD110",
+      "departure_airport": "LAX",
+      "departure_time": "2024-05-12T12:30:00",
+      "arrival_airport": "SFO",
+      "arrival_time": "2024-05-12T15:00:00",
+      "fare": 260,
+      "available_seats": 110
+    },
+    {
+      "flight_number": "JD111",
+      "departure_airport": "SFO",
+      "departure_time": "2024-05-12T15:30:00",
+      "arrival_airport": "JFK",
+      "arrival_time": "2024-05-12T21:00:00",
+      "fare": 300,
+      "available_seats": 100
+    },
+    {
+      "flight_number": "JD112",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-13T09:00:00",
+      "arrival_airport": "ORD",
+      "arrival_time": "2024-05-13T12:30:00",
+      "fare": 250,
+      "available_seats": 140
+    },
+    {
+      "flight_number": "JD113",
+      "departure_airport": "ORD",
+      "departure_time": "2024-05-13T13:00:00",
+      "arrival_airport": "LAX",
+      "arrival_time": "2024-05-13T16:30:00",
+      "fare": 290,
+      "available_seats": 120
+    },
+    {
+      "flight_number": "JD114",
+      "departure_airport": "LAX",
+      "departure_time": "2024-05-13T17:00:00",
+      "arrival_airport": "SFO",
+      "arrival_time": "2024-05-13T19:30:00",
+      "fare": 270,
+      "available_seats": 110
+    },
+    {
+      "flight_number": "JD115",
+      "departure_airport": "SFO",
+      "departure_time": "2024-05-13T20:00:00",
+      "arrival_airport": "JFK",
+      "arrival_time": "2024-05-14T01:30:00",
+      "fare": 320,
+      "available_seats": 90
+    },
+    {
+      "flight_number": "JD116",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-14T10:00:00",
+      "arrival_airport": "LAX",
+      "arrival_time": "2024-05-14T13:30:00",
+      "fare": 280,
+      "available_seats": 120
+    },
+    {
+      "flight_number": "JD117",
+      "departure_airport": "LAX",
+      "departure_time": "2024-05-14T14:00:00",
+      "arrival_airport": "SFO",
+      "arrival_time": "2024-05-14T16:30:00",
+      "fare": 260,
+      "available_seats": 110
+    },
+    {
+      "flight_number": "JD118",
+      "departure_airport": "SFO",
+      "departure_time": "2024-05-14T17:00:00",
+      "arrival_airport": "ORD",
+      "arrival_time": "2024-05-14T22:30:00",
+      "fare": 300,
+      "available_seats": 100
+    },
+    {
+      "flight_number": "JD119",
+      "departure_airport": "ORD",
+      "departure_time": "2024-05-15T08:30:00",
+      "arrival_airport": "JFK",
+      "arrival_time": "2024-05-15T12:00:00",
+      "fare": 270,
+      "available_seats": 140
+    },
+    {
+      "flight_number": "JD120",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-15T12:30:00",
+      "arrival_airport": "LAX",
+      "arrival_time": "2024-05-15T16:00:00",
+      "fare": 290,
+      "available_seats": 130
+    },
+    {
+      "flight_number": "JD121",
+      "departure_airport": "LAX",
+      "departure_time": "2024-05-15T16:30:00",
+      "arrival_airport": "SFO",
+      "arrival_time": "2024-05-15T19:00:00",
+      "fare": 280,
+      "available_seats": 120
+    },
+    {
+      "flight_number": "JD122",
+      "departure_airport": "SFO",
+      "departure_time": "2024-05-15T19:30:00",
+      "arrival_airport": "ORD",
+      "arrival_time": "2024-05-16T01:00:00",
+      "fare": 310,
+      "available_seats": 110
+    },
+    {
+      "flight_number": "JD123",
+      "departure_airport": "ORD",
+      "departure_time": "2024-05-16T08:00:00",
+      "arrival_airport": "JFK",
+      "arrival_time": "2024-05-16T11:30:00",
+      "fare": 280,
+      "available_seats": 120
+    },
+    {
+      "flight_number": "JD124",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-16T12:00:00",
+      "arrival_airport": "LAX",
+      "arrival_time": "2024-05-16T15:30:00",
+      "fare": 300,
+      "available_seats": 110
+    },
+    {
+      "flight_number": "JD125",
+      "departure_airport": "LAX",
+      "departure_time": "2024-05-16T16:00:00",
+      "arrival_airport": "SFO",
+      "arrival_time": "2024-05-16T18:30:00",
+      "fare": 270,
+      "available_seats": 100
+    },
+    {
+      "flight_number": "JD126",
+      "departure_airport": "SFO",
+      "departure_time": "2024-05-16T19:00:00",
+      "arrival_airport": "ORD",
+      "arrival_time": "2024-05-17T01:30:00",
+      "fare": 310,
+      "available_seats": 90
+    },
+    {
+      "flight_number": "JD127",
+      "departure_airport": "ORD",
+      "departure_time": "2024-05-17T08:30:00",
+      "arrival_airport": "JFK",
+      "arrival_time": "2024-05-17T12:00:00",
+      "fare": 290,
+      "available_seats": 120
+    },
+    {
+      "flight_number": "JD128",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-17T12:30:00",
+      "arrival_airport": "LAX",
+      "arrival_time": "2024-05-17T16:00:00",
+      "fare": 280,
+      "available_seats": 110
+    },
+    {
+      "flight_number": "JD129",
+      "departure_airport": "LAX",
+      "departure_time": "2024-05-17T16:30:00",
+      "arrival_airport": "SFO",
+      "arrival_time": "2024-05-17T19:00:00",
+      "fare": 300,
+      "available_seats": 100
+    },
+    {
+      "flight_number": "JD130",
+      "departure_airport": "SFO",
+      "departure_time": "2024-05-17T19:30:00",
+      "arrival_airport": "ORD",
+      "arrival_time": "2024-05-18T01:00:00",
+      "fare": 270,
+      "available_seats": 90
+    },
+    {
+      "flight_number": "JD131",
+      "departure_airport": "ORD",
+      "departure_time": "2024-05-18T08:00:00",
+      "arrival_airport": "JFK",
+      "arrival_time": "2024-05-18T11:30:00",
+      "fare": 280,
+      "available_seats": 120
+    },
+    {
+      "flight_number": "JD132",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-18T12:00:00",
+      "arrival_airport": "LAX",
+      "arrival_time": "2024-05-18T15:30:00",
+      "fare": 300,
+      "available_seats": 110
+    },
+    {
+      "flight_number": "JD133",
+      "departure_airport": "LAX",
+      "departure_time": "2024-05-18T16:00:00",
+      "arrival_airport": "SFO",
+      "arrival_time": "2024-05-18T18:30:00",
+      "fare": 270,
+      "available_seats": 100
+    },
+    {
+      "flight_number": "JD134",
+      "departure_airport": "SFO",
+      "departure_time": "2024-05-18T19:00:00",
+      "arrival_airport": "ORD",
+      "arrival_time": "2024-05-19T01:30:00",
+      "fare": 310,
+      "available_seats": 90
+    },
+    {
+      "flight_number": "JD135",
+      "departure_airport": "ORD",
+      "departure_time": "2024-05-19T08:30:00",
+      "arrival_airport": "JFK",
+      "arrival_time": "2024-05-19T12:00:00",
+      "fare": 290,
+      "available_seats": 120
+    },
+    {
+      "flight_number": "JD136",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-19T12:30:00",
+      "arrival_airport": "LAX",
+      "arrival_time": "2024-05-19T16:00:00",
+      "fare": 280,
+      "available_seats": 110
+    },
+    {
+      "flight_number": "JD137",
+      "departure_airport": "LAX",
+      "departure_time": "2024-05-19T16:30:00",
+      "arrival_airport": "SFO",
+      "arrival_time": "2024-05-19T19:00:00",
+      "fare": 300,
+      "available_seats": 100
+    },
+    {
+      "flight_number": "JD138",
+      "departure_airport": "SFO",
+      "departure_time": "2024-05-19T19:30:00",
+      "arrival_airport": "ORD",
+      "arrival_time": "2024-05-20T01:00:00",
+      "fare": 270,
+      "available_seats": 90
+    },
+    {
+      "flight_number": "JD139",
+      "departure_airport": "ORD",
+      "departure_time": "2024-05-20T08:00:00",
+      "arrival_airport": "JFK",
+      "arrival_time": "2024-05-20T11:30:00",
+      "fare": 280,
+      "available_seats": 120
+    },
+    {
+      "flight_number": "JD140",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-20T12:00:00",
+      "arrival_airport": "LAX",
+      "arrival_time": "2024-05-20T15:30:00",
+      "fare": 300,
+      "available_seats": 110
+    },
+    {
+      "flight_number": "JD141",
+      "departure_airport": "LAX",
+      "departure_time": "2024-05-20T16:00:00",
+      "arrival_airport": "SFO",
+      "arrival_time": "2024-05-20T18:30:00",
+      "fare": 270,
+      "available_seats": 100
+    },
+    {
+      "flight_number": "JD142",
+      "departure_airport": "SFO",
+      "departure_time": "2024-05-20T19:00:00",
+      "arrival_airport": "ORD",
+      "arrival_time": "2024-05-21T01:30:00",
+      "fare": 310,
+      "available_seats": 90
+    },
+    {
+      "flight_number": "JD143",
+      "departure_airport": "ORD",
+      "departure_time": "2024-05-21T08:30:00",
+      "arrival_airport": "JFK",
+      "arrival_time": "2024-05-21T12:00:00",
+      "fare": 290,
+      "available_seats": 120
+    },
+    {
+      "flight_number": "JD144",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-21T12:30:00",
+      "arrival_airport": "LAX",
+      "arrival_time": "2024-05-21T16:00:00",
+      "fare": 280,
+      "available_seats": 110
+    },
+    {
+      "flight_number": "JD145",
+      "departure_airport": "LAX",
+      "departure_time": "2024-05-21T16:30:00",
+      "arrival_airport": "SFO",
+      "arrival_time": "2024-05-21T19:00:00",
+      "fare": 300,
+      "available_seats": 100
+    },
+    {
+      "flight_number": "JD146",
+      "departure_airport": "SFO",
+      "departure_time": "2024-05-21T19:30:00",
+      "arrival_airport": "ORD",
+      "arrival_time": "2024-05-22T01:00:00",
+      "fare": 270,
+      "available_seats": 90
+    },
+    {
+      "flight_number": "JD147",
+      "departure_airport": "ORD",
+      "departure_time": "2024-05-22T08:00:00",
+      "arrival_airport": "JFK",
+      "arrival_time": "2024-05-22T11:30:00",
+      "fare": 280,
+      "available_seats": 120
+    },
+    {
+      "flight_number": "JD148",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-22T12:00:00",
+      "arrival_airport": "LAX",
+      "arrival_time": "2024-05-22T15:30:00",
+      "fare": 300,
+      "available_seats": 110
+    },
+    {
+      "flight_number": "JD149",
+      "departure_airport": "LAX",
+      "departure_time": "2024-05-22T16:00:00",
+      "arrival_airport": "SFO",
+      "arrival_time": "2024-05-22T18:30:00",
+      "fare": 270,
+      "available_seats": 100
+    },
+    {
+      "flight_number": "JD150",
+      "departure_airport": "SFO",
+      "departure_time": "2024-05-22T19:00:00",
+      "arrival_airport": "ORD",
+      "arrival_time": "2024-05-23T01:30:00",
+      "fare": 310,
+      "available_seats": 90
+    },
+    {
+      "flight_number": "JD151",
+      "departure_airport": "ORD",
+      "departure_time": "2024-05-23T08:30:00",
+      "arrival_airport": "JFK",
+      "arrival_time": "2024-05-23T12:00:00",
+      "fare": 290,
+      "available_seats": 120
+    },
+    {
+      "flight_number": "JD152",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-23T12:30:00",
+      "arrival_airport": "LAX",
+      "arrival_time": "2024-05-23T16:00:00",
+      "fare": 280,
+      "available_seats": 110
+    },
+    {
+      "flight_number": "JD153",
+      "departure_airport": "LAX",
+      "departure_time": "2024-05-23T16:30:00",
+      "arrival_airport": "SFO",
+      "arrival_time": "2024-05-23T19:00:00",
+      "fare": 300,
+      "available_seats": 100
+    },
+    {
+      "flight_number": "JD154",
+      "departure_airport": "SFO",
+      "departure_time": "2024-05-23T19:30:00",
+      "arrival_airport": "ORD",
+      "arrival_time": "2024-05-24T01:00:00",
+      "fare": 270,
+      "available_seats": 90
+    },
+    {
+      "flight_number": "JD155",
+      "departure_airport": "ORD",
+      "departure_time": "2024-05-24T08:00:00",
+      "arrival_airport": "JFK",
+      "arrival_time": "2024-05-24T11:30:00",
+      "fare": 280,
+      "available_seats": 120
+    },
+    {
+      "flight_number": "JD156",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-24T12:00:00",
+      "arrival_airport": "LAX",
+      "arrival_time": "2024-05-24T15:30:00",
+      "fare": 300,
+      "available_seats": 110
+    },
+    {
+      "flight_number": "JD157",
+      "departure_airport": "LAX",
+      "departure_time": "2024-05-24T16:00:00",
+      "arrival_airport": "SFO",
+      "arrival_time": "2024-05-24T18:30:00",
+      "fare": 270,
+      "available_seats": 100
+    },
+    {
+      "flight_number": "JD158",
+      "departure_airport": "SFO",
+      "departure_time": "2024-05-24T19:00:00",
+      "arrival_airport": "ORD",
+      "arrival_time": "2024-05-25T01:30:00",
+      "fare": 310,
+      "available_seats": 90
+    },
+    {
+      "flight_number": "JD159",
+      "departure_airport": "ORD",
+      "departure_time": "2024-05-25T08:30:00",
+      "arrival_airport": "JFK",
+      "arrival_time": "2024-05-25T12:00:00",
+      "fare": 290,
+      "available_seats": 120
+    },
+    {
+      "flight_number": "JD160",
+      "departure_airport": "JFK",
+      "departure_time": "2024-05-25T12:30:00",
+      "arrival_airport": "LAX",
+      "arrival_time": "2024-05-25T16:00:00",
+      "fare": 280,
+      "available_seats": 110
+    }
+  ]
+}
