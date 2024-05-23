@@ -1,6 +1,6 @@
 const bookings = [
   {
-    flight_number: "JD100",
+    flight_id: "vcvbgvvvhv",
     user_id: 2,
     date: "anydate",
     seat_no: 12,
@@ -16,7 +16,7 @@ export const getBookedSeats = (req, res) => {
 };
 
 export const makeBooking = (req, res) => {
-  let { userId, flightNumber, date, seatNoArr } = req.body;
+  let { userId, flightId, date, seatNoArr } = req.body;
   let isBooked = false;
   bookings.forEach((booking) => {
     seatNoArr.forEach((seatNo) => {

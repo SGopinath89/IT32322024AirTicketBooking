@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const bookingSchema = new mongoose.Schema(
   {
-    flight_number: {
+    flight_id: {
       type: String,
       required: true,
     },

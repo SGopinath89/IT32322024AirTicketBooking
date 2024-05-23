@@ -9,7 +9,7 @@ import {
 
 const router = express.Router();
 
-router.get("/filteredFlights", getFilteredFlights);
+router.post("/filteredFlights", getFilteredFlights);
 router.get("/getFlightById/:id", getFlightById);
 router.post("/new", createFlight);
 router.post("/newbulk", createFlightBulk);

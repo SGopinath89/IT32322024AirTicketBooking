@@ -8,11 +8,15 @@ export const getAllFlights = async (req, res) => {
 export const getFilteredFlights = async (req, res) => {
   const { from, to } = req.body;
 
-  let filteredFlightsArr = await Flight.find({
-    $and: [{ departure_airport: from }, { arrival_airport: to }],
-  });
+  try {
+    let filteredFlightsArr = await Flight.find({
+      $and: [{ departure_airport: from }, { arrival_airport: to }],
+    });
 
-  return res.status(200).json(filteredFlightsArr);
+    return res.status(200).json(filteredFlightsArr);
+  } catch (err) {
+    console.log("The Error is : " + error);
+  }
 };
 
 export const getFlightById = async (req, res) => {

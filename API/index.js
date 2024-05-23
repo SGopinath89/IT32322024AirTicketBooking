@@ -17,16 +17,15 @@ mongoose
   .connect(process.env.MONGO)
   .then(() => {
     console.log("Conected to Mongo");
-    console.log();
   })
   .catch((err) => {
     console.log(err);
   });
 
-app.use("/flight", flightRouter);
-app.use("/auth", authRouter);
-app.use("/user", userRouter);
-app.use("/booking", bookingRouter);
+app.use("/api1/flight", flightRouter);
+app.use("/api1/auth", authRouter);
+app.use("/api1/user", userRouter);
+app.use("/api1/booking", bookingRouter);
 
 app.listen(port, () => {
   console.log(`app is listening on port ${port}`);
