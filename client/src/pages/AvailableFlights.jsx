@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AvailableFlights = () => {
   const [flightData, setFlightData] = useState([]);
 
+  const navigate = useNavigate();
   const location = useLocation();
   const { formData } = location.state;
 
@@ -23,10 +24,13 @@ const AvailableFlights = () => {
     };
 
     fetchAvailableFlights();
-    console.log(flightData);
   }, []);
 
-  const onFlightClick = async (e) => {};
+  const onFlightClick = async (e) => {
+    const flightId =
+      e.target.tagName === "IMG" ? e.target.parentElement.id : e.target.id;
+    navigate("/Schedule", { state: { flightId } });
+  };
 
   return (
     <div>

@@ -1,3 +1,5 @@
+import Booking from "../models/booking.model.js";
+import { ObjectId } from "mongodb";
 const bookings = [
   {
     flight_id: "vcvbgvvvhv",
@@ -7,31 +9,71 @@ const bookings = [
   },
 ];
 
-export const getBookedSeats = (req, res) => {
-  let { date } = req.body;
+export const getBookedSeats = async (req, res) => {
+  let { date, flightId } = req.body;
 
-  let bookedSeats = bookings.filter((booking) => booking.date == date);
-
-  res.status(200).json(bookedSeats);
+  try {
+    flightId = new ObjectId(flightId);
+    let bookedSeats = await Booking.find(
+      { flight_id: flightId, date },
+      { seat_no: 1 }
+    );
+    res.status(200).json(bookedSeats);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const makeBooking = (req, res) => {
+export const makeBooking = async (req, res) => {
   let { userId, flightId, date, seatNoArr } = req.body;
   let isBooked = false;
-  bookings.forEach((booking) => {
-    seatNoArr.forEach((seatNo) => {
-      if (booking.seat_no == seatNo) return (isBooked = true);
-    });
-  });
+  try {
+    flightId = new ObjectId(flightId);
+
+    for (let i = 0; i < seatNoArr.length; i++) {
+      const thatAlreadyBookedSeat = await Booking.findOne({
+        flight_id: flightId,
+        date,
+        seat_no: seatNoArr[i] + 1,
+      });
+
+      console.log(thatAlreadyBookedSeat);
+
+      if (thatAlreadyBookedSeat) {
+        isBooked = true;
+        console.log("try block");
+        res
+          .status(403)
+          .json(JSON.stringify({ message: "already booked seat" }));
+        break;
+      }
+    }
+  } catch (error) {
+    isBooked = true;
+    console.log("catch block");
+    console.log("error on 'thatAlreadyBookedSeat' checking :" + error);
+    res.status(403).json(JSON.stringify({ message: "already booked seat" }));
+  }
 
   if (!isBooked) {
-    seatNoArr.forEach((seatNo) => {
-      bookings.push({
-        flight_number: flightNumber,
-        user_id: userId,
-        date: date,
-        seat_no: seatNo,
-      });
-    });
+    try {
+      flightId = new ObjectId(flightId);
+
+      let lastInsertedId = "";
+      for (let i = 0; i < seatNoArr.length; i++) {
+        const newBooking = new Booking({
+          flight_id: flightId,
+          user_id: userId,
+          date: date,
+          seat_no: seatNoArr[i] + 1,
+        });
+
+        lastInsertedId = (await newBooking.save())._id;
+      }
+
+      res.status(201).json({ lastInsertedId });
+    } catch (error) {
+      console.log(error);
+    }
   }
 };

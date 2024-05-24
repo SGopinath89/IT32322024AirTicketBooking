@@ -1,5 +1,7 @@
 import Flight from "../models/flight.model.js";
 
+import { ObjectId } from "mongodb";
+
 export const getAllFlights = async (req, res) => {
   let flights = await Flight.find();
   return res.status(200).json(flights);
@@ -22,9 +24,17 @@ export const getFilteredFlights = async (req, res) => {
 export const getFlightById = async (req, res) => {
   const { id } = req.params;
 
-  const flight = await Flight.findOne({ flight_number: id });
+  try {
+    const objId = new ObjectId(id);
 
-  return res.status(200).json(flight);
+    const flight = await Flight.findOne({ _id: objId });
+
+    return res.status(200).json(flight);
+  } catch (error) {
+    return res
+      .status(404)
+      .json(JSON.stringify({ message: "Flight not found" }));
+  }
 };
 
 export const createFlight = async (req, res) => {

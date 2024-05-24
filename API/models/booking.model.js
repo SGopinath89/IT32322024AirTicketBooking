@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const bookingSchema = new mongoose.Schema(
   {
     flight_id: {
-      type: String,
+      type: mongoose.Types.ObjectId,
       required: true,
     },
     user_id: {

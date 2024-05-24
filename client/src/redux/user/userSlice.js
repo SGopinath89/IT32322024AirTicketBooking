@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  from: null,
-  to: null,
+  currentUser: null,
+  error: null,
+  loading: false,
 };
 
-const airportsSlice = createSlice({
-  name: "airports",
+const userSlice = createSlice({
+  name: "user",
   initialState,
   reducers: {
     signInStart: (state) => {
