@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Notification from "../components/Notification";
 import { signInSuccess } from "../redux/user/userSlice.js";
@@ -20,7 +20,6 @@ const Login = () => {
   };
 
   const onClickHandler = async () => {
-    console.log(33);
     const body = JSON.stringify(formData);
 
     const res = await fetch("/api1/auth/signin", {
@@ -30,7 +29,7 @@ const Login = () => {
       },
       body,
     });
-    console.log(123);
+
     if (!res.ok) {
       setNotification({ message: "User not found!", status: "failure" });
       throw new Error("User not found!");

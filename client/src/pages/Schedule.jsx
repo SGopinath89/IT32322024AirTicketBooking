@@ -10,7 +10,7 @@ const Schedule = () => {
   const [choosenDate, setChoosenDate] = useState("");
   const [lastInsertedId, setLastInsertedId] = useState("");
 
-  const user = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
 
   const location = useLocation();
   const { flightId } = location.state;
@@ -100,7 +100,7 @@ const Schedule = () => {
         },
         body: JSON.stringify({
           date: choosenDate,
-          userId: 1,
+          userId: currentUser._id,
           flightId,
           seatNoArr: choosedSeats,
         }),

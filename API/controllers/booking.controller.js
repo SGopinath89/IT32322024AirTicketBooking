@@ -51,6 +51,7 @@ export const makeBooking = async (req, res, next) => {
   if (!isBooked) {
     try {
       flightId = new ObjectId(flightId);
+      userId = new ObjectId(userId);
 
       let lastInsertedId = "";
       for (let i = 0; i < seatNoArr.length; i++) {
