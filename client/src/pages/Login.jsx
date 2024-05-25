@@ -1,14 +1,52 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Notification from "../components/Notification";
+import { signInSuccess } from "../redux/user/userSlice.js";
+
 const Login = () => {
+  const [formData, setFormData] = useState({});
   const [notification, setNotification] = useState({
     message: "",
     status: "",
   });
-  const { error, loading } = useSelector((state) => state.user);
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const onChangeHandler = (e) => {
+    setFormData((curData) => {
+      return { ...curData, [e.target.id]: e.target.value };
+    });
+  };
+
+  const onClickHandler = async () => {
+    const body = JSON.stringify(formData);
+    try {
+      const res = await fetch("/api1/auth/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body,
+      });
+
+      if (!res.ok) {
+        setNotification({ message: "User not found!", status: "failure" });
+        throw new Error("User not found!");
+      }
+
+      const data = await res.json();
+      if (data.success == false) {
+        return;
+      }
+
+      dispatch(signInSuccess(data));
+      navigate("/");
+      return;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -18,20 +56,25 @@ const Login = () => {
         <form className="flex flex-col w-4/5">
           <input
             type="email"
+            id="email"
             placeholder="Email"
             className="rounded-md h-12 px-4 py-8 my-2"
+            onChange={(e) => onChangeHandler(e)}
           />
 
           <input
             type="password"
+            id="password"
             placeholder="Password"
             className="rounded-md h-12 px-4 py-8 my-2"
+            onChange={(e) => onChangeHandler(e)}
           />
           <div>
             <input
               type="button"
               value="Login"
               className="bg-teal-900 px-8 py-4 my-3 text-slate-100 cursor-pointer"
+              onClick={onClickHandler}
             />
           </div>
           <Link to="/Signup" className="text-blue-900">

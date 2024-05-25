@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Notification from "../components/Notification";
 
 const Signup = () => {
@@ -14,6 +14,8 @@ const Signup = () => {
   });
 
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const onChangeHandler = (e) => {
     setFormData((curObj) => {
@@ -38,6 +40,8 @@ const Signup = () => {
           if (res.ok) {
             let data = await res.json();
             setNotification({ message: data, status: "success" });
+
+            navigate("/Login");
           } else {
             setNotification({
               message: "User creation failure",
