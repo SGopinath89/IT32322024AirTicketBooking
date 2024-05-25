@@ -2,12 +2,12 @@ import Flight from "../models/flight.model.js";
 
 import { ObjectId } from "mongodb";
 
-export const getAllFlights = async (req, res) => {
+export const getAllFlights = async (req, res, next) => {
   let flights = await Flight.find();
   return res.status(200).json(flights);
 };
 
-export const getFilteredFlights = async (req, res) => {
+export const getFilteredFlights = async (req, res, next) => {
   const { from, to } = req.body;
 
   try {
@@ -18,10 +18,11 @@ export const getFilteredFlights = async (req, res) => {
     return res.status(200).json(filteredFlightsArr);
   } catch (err) {
     console.log("The Error is : " + error);
+    next(error);
   }
 };
 
-export const getFlightById = async (req, res) => {
+export const getFlightById = async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -31,13 +32,11 @@ export const getFlightById = async (req, res) => {
 
     return res.status(200).json(flight);
   } catch (error) {
-    return res
-      .status(404)
-      .json(JSON.stringify({ message: "Flight not found" }));
+    next(error);
   }
 };
 
-export const createFlight = async (req, res) => {
+export const createFlight = async (req, res, next) => {
   const {
     flight_number,
     departure_airport,
@@ -64,10 +63,11 @@ export const createFlight = async (req, res) => {
     return res.status(200).json(JSON.stringify({ message: "flight created" }));
   } catch (error) {
     console.log("the error is " + error);
+    next(error);
   }
 };
 
-export const createFlightBulk = async (req, res) => {
+export const createFlightBulk = async (req, res, next) => {
   const flightsArray = req.body;
 
   if (Array.isArray(flightsArray)) {
@@ -102,6 +102,7 @@ export const createFlightBulk = async (req, res) => {
         .json(JSON.stringify({ message: "flight created" }));
     } catch (error) {
       console.log("the error is " + error);
+      next(error);
     }
   }
 };

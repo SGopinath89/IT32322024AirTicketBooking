@@ -1,15 +1,7 @@
 import Booking from "../models/booking.model.js";
 import { ObjectId } from "mongodb";
-const bookings = [
-  {
-    flight_id: "vcvbgvvvhv",
-    user_id: 2,
-    date: "anydate",
-    seat_no: 12,
-  },
-];
 
-export const getBookedSeats = async (req, res) => {
+export const getBookedSeats = async (req, res, next) => {
   let { date, flightId } = req.body;
 
   try {
@@ -21,10 +13,11 @@ export const getBookedSeats = async (req, res) => {
     res.status(200).json(bookedSeats);
   } catch (error) {
     console.log(error);
+    next(error);
   }
 };
 
-export const makeBooking = async (req, res) => {
+export const makeBooking = async (req, res, next) => {
   let { userId, flightId, date, seatNoArr } = req.body;
   let isBooked = false;
   try {
@@ -52,7 +45,7 @@ export const makeBooking = async (req, res) => {
     isBooked = true;
     console.log("catch block");
     console.log("error on 'thatAlreadyBookedSeat' checking :" + error);
-    res.status(403).json(JSON.stringify({ message: "already booked seat" }));
+    next(error);
   }
 
   if (!isBooked) {
@@ -74,6 +67,7 @@ export const makeBooking = async (req, res) => {
       res.status(201).json({ lastInsertedId });
     } catch (error) {
       console.log(error);
+      next(error);
     }
   }
 };
