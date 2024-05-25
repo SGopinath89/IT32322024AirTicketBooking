@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 const Schedule = () => {
@@ -8,6 +9,8 @@ const Schedule = () => {
   const [tomorrowsDate, setTomorrowsDate] = useState("");
   const [choosenDate, setChoosenDate] = useState("");
   const [lastInsertedId, setLastInsertedId] = useState("");
+
+  const user = useSelector((state) => state.user);
 
   const location = useLocation();
   const { flightId } = location.state;

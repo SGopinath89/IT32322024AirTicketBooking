@@ -46,5 +46,7 @@ export const signin = async (req, res, next) => {
     } else {
       next(errorProvider(404, "user not found"));
     }
-  } catch (error) {}
+  } catch (error) {
+    next(error);
+  }
 };

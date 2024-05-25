@@ -20,32 +20,30 @@ const Login = () => {
   };
 
   const onClickHandler = async () => {
+    console.log(33);
     const body = JSON.stringify(formData);
-    try {
-      const res = await fetch("/api1/auth/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body,
-      });
 
-      if (!res.ok) {
-        setNotification({ message: "User not found!", status: "failure" });
-        throw new Error("User not found!");
-      }
-
-      const data = await res.json();
-      if (data.success == false) {
-        return;
-      }
-
-      dispatch(signInSuccess(data));
-      navigate("/");
-      return;
-    } catch (error) {
-      console.log(error);
+    const res = await fetch("/api1/auth/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body,
+    });
+    console.log(123);
+    if (!res.ok) {
+      setNotification({ message: "User not found!", status: "failure" });
+      throw new Error("User not found!");
     }
+
+    const data = await res.json();
+    if (data.success == false) {
+      return;
+    }
+
+    dispatch(signInSuccess(data));
+    navigate("/");
+    return;
   };
 
   return (

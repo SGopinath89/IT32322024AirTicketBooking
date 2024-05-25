@@ -30,6 +30,8 @@ app.use("/api1/user", userRouter);
 app.use("/api1/booking", bookingRouter);
 
 app.use((err, req, res, next) => {
+  console.log(123);
+
   const statuscode = err.statuscode;
   const message = err.message;
   return res.status(statuscode).json({
