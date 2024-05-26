@@ -14,17 +14,17 @@ const Header = () => {
     <div className="h-20 bg-teal-800 flex justify-between items-center text-white px-3">
       <p className="text-6xl font-thin mx-16">JD Airlines</p>
       <ul className="flex w-1/3 justify-around text-xl">
-        <li className="list-none hover:bg-white hover:text-teal-800 p-3 cursor-pointer transition-colors">
+        <li className="list-none hover:bg-white hover:text-teal-800 p-3 cursor-pointer transition-colors rounded-lg">
           <Link to="/">Home</Link>
         </li>
-        <li className="list-none hover:bg-white hover:text-teal-800 p-3 cursor-pointer transition-colors">
+        <li className="list-none hover:bg-white hover:text-teal-800 p-3 cursor-pointer transition-colors rounded-lg">
           Manage Booking
         </li>
-        <li className="list-none hover:bg-white hover:text-teal-800 p-3 cursor-pointer transition-colors">
+        <li className="list-none hover:bg-white hover:text-teal-800 p-3 cursor-pointer transition-colors rounded-lg">
           About
         </li>
         <li
-          className="list-none hover:bg-white hover:text-teal-800 p-3 cursor-pointer transition-colors"
+          className="list-none hover:bg-white hover:text-teal-800 p-3 cursor-pointer transition-colors rounded-lg"
           onClick={onClickHandler}
         >
           Signout
