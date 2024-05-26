@@ -40,8 +40,11 @@ const AvailableFlights = () => {
   };
 
   return (
-    <div className="size-full">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 p-6 bg-white/30 rounded-xl shadow-2xl flex flex-col items-center">
+    <div className="bg-hero-pattern h-full bg-no-repeat bg-cover size-full">
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 p-6 bg-white/30 rounded-xl shadow-2xl flex flex-col items-center overflow-scroll"
+        style={{ maxHeight: "80vh", scrollbarWidth: "none" }}
+      >
         <h1 className="text-4xl text-white text-center font-extralight my-10">
           Available Flights
         </h1>
@@ -49,7 +52,7 @@ const AvailableFlights = () => {
           return (
             <div
               key={ind}
-              className="flight-box bg-white/75 text-xl text-slate-700 my-2 flex justify-between rounded-xl overflow-hidden h-32 items-center p-2 w-11/12 hover:scale-x-105 cursor-pointer"
+              className="flight-box bg-white/75 text-xl text-slate-700 my-2 flex flex-shrink-0 justify-between rounded-xl overflow-hidden h-32 items-center p-2 w-11/12 hover:scale-x-105 cursor-pointer"
               id={ele._id}
               onClick={(e) => onFlightClick(e)}
             >

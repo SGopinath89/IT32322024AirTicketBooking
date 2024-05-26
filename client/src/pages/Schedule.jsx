@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import Notification from "../components/Notification";
 
 const Schedule = () => {
   const [seatCount, setSeatCount] = useState(0);
@@ -9,6 +10,7 @@ const Schedule = () => {
   const [tomorrowsDate, setTomorrowsDate] = useState("");
   const [choosenDate, setChoosenDate] = useState("");
   const [lastInsertedId, setLastInsertedId] = useState("");
+  const [notification, setNotification] = useState({ message: "", status: "" });
 
   const { currentUser } = useSelector((state) => state.user);
 
@@ -36,7 +38,7 @@ const Schedule = () => {
 
   useEffect(() => {
     const fetchBookedSeats = async () => {
-      const res = await fetch(`/api1/booking/`, {
+      const res = await fetch(`/api1/booking/flight`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,8 +59,6 @@ const Schedule = () => {
       });
 
       setBookedSeats(finalArr);
-      //console.log("final array also chnaged");
-      //console.log(bookedSeats);
     };
 
     fetchBookedSeats();
@@ -69,7 +69,12 @@ const Schedule = () => {
       return;
     }
 
-    const seatId = parseInt(e.target.id, 10);
+    let target = e.target;
+    while (target && !target.classList.contains("seat")) {
+      target = target.parentElement;
+    }
+
+    const seatId = parseInt(target.id, 10);
     const updatedSeats = [...choosedSeats];
 
     if (!updatedSeats.includes(seatId)) {
@@ -88,7 +93,17 @@ const Schedule = () => {
   }, [choosedSeats]);
 
   const onDateChange = (e) => {
-    setChoosenDate(e.target.value);
+    const tomDate = new Date(getTomorrowsDate());
+    const choDate = new Date(e.target.value);
+    if (choDate < tomDate) {
+      e.target.value = choosenDate;
+      return setNotification({
+        message: "Please choose a valid date (atleast a day before travel)",
+        status: "failure",
+      });
+    }
+
+    return setChoosenDate(e.target.value);
   };
 
   const onBookClicked = async () => {
@@ -107,52 +122,68 @@ const Schedule = () => {
       });
 
       if (!res.ok) {
-        return alert("A seat already booked, choose different one");
+        return setNotification({
+          message: "A seat already booked, choose different one",
+          status: "failure",
+        });
       }
 
       const data = await res.json();
 
       setLastInsertedId(data.lastInsertedId);
       setChoosedSeats([]);
+      setNotification({
+        message: "Booking Succesful",
+        status: "success",
+      });
     } else {
-      alert("Please choose atleast one seat");
+      setNotification({
+        message: "Please choose atleast one seat",
+        status: "failure",
+      });
     }
   };
 
   return (
-    <div>
-      <div>
+    <div className="bg-hero-pattern h-full bg-no-repeat bg-cover size-full">
+      <Notification notification={notification} />
+      <div className="flex justify-center">
         <input
           type="date"
-          name=""
-          id=""
           defaultValue={tomorrowsDate}
           onChange={(e) => onDateChange(e)}
+          className="bg-transparent text-white text-xl px-5 py-2 focus:outline-none cursor-pointer rounded-md border border-white "
         />
       </div>
-      {bookedSeats.map((status, ind) => {
-        //console.log("printed the array " + bookedSeats);
-        return (
-          <div
-            key={ind}
-            id={ind}
-            className={`h-16 w-16 mx-1 my-1 inline-block ${
-              status === 0 ? "bg-slate-400 cursor-pointer" : "bg-red-400"
-            }`}
-            onClick={onSeatClicked}
-            style={{
-              backgroundColor: choosedSeats.includes(ind) ? "green" : "",
-            }}
-          >
-            {ind + 1}
-          </div>
-        );
-      })}
-      <div>
+      <div className="my-6 px-4">
+        {bookedSeats.map((status, ind) => {
+          return (
+            <div
+              key={ind}
+              id={ind}
+              className={`seat size-16 mx-1 my-1 inline-block relative rounded-md ${
+                status === 0 ? "bg-white/70  cursor-pointer" : "bg-red-400"
+              }`}
+              onClick={onSeatClicked}
+              style={{
+                backgroundColor: choosedSeats.includes(ind)
+                  ? "rgba(17,94,89,0.5)"
+                  : "",
+              }}
+            >
+              <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-bold">
+                {ind + 1}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="flex justify-center">
         <input
           type="button"
           value="Book"
-          className="hover:cursor-pointer hover:bg-slate-500 my-3 mx-3 px-2 py-2 border border-black "
+          className="w-40 rounded-md px-3 py-2 text-xl focus:outline-none bg-teal-800 text-white hover:bg-teal-700 transition-colors cursor-pointer"
           onClick={onBookClicked}
         />
       </div>

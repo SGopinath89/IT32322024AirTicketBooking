@@ -29,7 +29,7 @@ const Home = () => {
     navigate("/AvailableFlights", { state: { formData } });
   };
   return (
-    <div className="size-full">
+    <div className="bg-hero-pattern h-full bg-no-repeat bg-cover size-full">
       <div className="inline-block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 p-6 bg-white/30 rounded-xl shadow-2xl">
         <form className=" flex justify-around">
           <select

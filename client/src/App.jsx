@@ -6,6 +6,7 @@ import Schedule from "./pages/Schedule";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import PrivateRoute from "./components/PrivateRoute";
+import ManageBookings from "./pages/ManageBookings";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route element={<Home />} path="/" />
           <Route element={<AvailableFlights />} path="/AvailableFlights" />
           <Route element={<Schedule />} path="/Schedule" />
+          <Route element={<ManageBookings />} path="/ManageBookings" />
         </Route>
 
         <Route element={<Login />} path="/Login" />
