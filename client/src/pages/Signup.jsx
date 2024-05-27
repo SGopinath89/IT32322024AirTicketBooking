@@ -54,11 +54,17 @@ const Signup = () => {
 
         setLoading(false);
       } else {
-        alert("password and confirm password should match");
+        setNotification({
+          message: "password and confirm password should match",
+          status: "failure",
+        });
         setLoading(false);
       }
     } else {
-      alert("All the fields are required!");
+      setNotification({
+        message: "All the fields are required!",
+        status: "failure",
+      });
       setLoading(false);
     }
   };

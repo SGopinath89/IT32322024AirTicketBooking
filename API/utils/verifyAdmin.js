@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import errorProvider from "./errorProvider.js";
 
-const verifyUser = (req, res, next) => {
+const verifyAdmin = (req, res, next) => {
   const token = req.cookies["access-token"];
 
   //check is there any token exists
@@ -9,7 +9,7 @@ const verifyUser = (req, res, next) => {
 
   //verify the token and return raw data(_id)
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) {
+    if (err || !user.admin) {
       return next(errorProvider(403, "Forbidden"));
     }
 
@@ -18,4 +18,4 @@ const verifyUser = (req, res, next) => {
   });
 };
 
-export default verifyUser;
+export default verifyAdmin;

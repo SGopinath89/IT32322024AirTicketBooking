@@ -33,7 +33,13 @@ export const signin = async (req, res, next) => {
       let validPassword = await bcryptjs.compare(password, validUser.password);
 
       if (validPassword) {
-        const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
+        let tokenPayload = { id: validUser._id };
+        if (validUser._doc.admin) {
+          tokenPayload.admin = true;
+        }
+
+        // Generate JWT token
+        const token = jwt.sign(tokenPayload, process.env.JWT_SECRET);
         const { password: pass, ...rest } = validUser._doc;
 
         res

@@ -11,7 +11,7 @@ const Notification = ({ notification }) => {
     const timer = setTimeout(() => {
       setMessage("");
       setStatus("");
-    }, 5000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [notification]);

@@ -32,7 +32,7 @@ const Header = () => {
         </li>
         <li className="list-none">
           <Link
-            to="/"
+            to="/About"
             className="hover:bg-white hover:text-teal-800 p-3 cursor-pointer transition-colors rounded-lg"
           >
             About

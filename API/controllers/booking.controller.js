@@ -79,7 +79,9 @@ export const getBookingsByUser = async (req, res, next) => {
   try {
     userId = new ObjectId(userId);
 
-    const bookings = await Booking.find({ user_id: userId });
+    const bookings = await Booking.find({ user_id: userId }).sort({
+      updatedAt: -1,
+    });
 
     if (!bookings) {
       return next(errorProvider(404, "No Bookings found"));
@@ -95,6 +97,7 @@ export const getBookingsByUser = async (req, res, next) => {
 
       const reqData = {
         bookingId: bookings[i]._id,
+        flightId: flightData._id,
         flightNo: flightData.flight_number,
         depAirport: flightData.departure_airport,
         depTime: flightData.departure_time,
@@ -131,7 +134,7 @@ export const getBooking = async (req, res, next) => {
 
 export const getAllBookings = async (req, res, next) => {
   try {
-    const bookings = await Booking.find();
+    const bookings = await Booking.find().sort({ updatedAt: -1 });
 
     if (!bookings) {
       return next(errorProvider(404, "No Bookings found"));
@@ -155,6 +158,31 @@ export const deleteBooking = async (req, res, next) => {
     }
 
     res.status(200).json("booking deleted");
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateBooking = async (req, res, next) => {
+  let { bookingId, seatNo, date } = req.body;
+
+  try {
+    //bookingId = new ObjectId(bookingId);
+
+    const updatedBooking = await Booking.findByIdAndUpdate(
+      bookingId,
+      {
+        $set: {
+          seat_no: seatNo + 1,
+          date,
+        },
+      },
+      { new: true }
+    );
+
+    const { _id, ...rest } = updatedBooking._doc;
+
+    res.status(200).json({ _id });
   } catch (error) {
     next(error);
   }

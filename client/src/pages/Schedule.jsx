@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import Notification from "../components/Notification";
+import unauthorizedHandler from "../functions/unauthorizedHandler";
+import Seat from "../components/Seat";
 
 const Schedule = () => {
   const [seatCount, setSeatCount] = useState(0);
@@ -11,11 +13,23 @@ const Schedule = () => {
   const [choosenDate, setChoosenDate] = useState("");
   const [lastInsertedId, setLastInsertedId] = useState("");
   const [notification, setNotification] = useState({ message: "", status: "" });
+  const [btnType, setBtnType] = useState("Book");
+  const [dateActive, setDateActive] = useState(true);
 
   const { currentUser } = useSelector((state) => state.user);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const location = useLocation();
   const { flightId } = location.state;
+  const { bookingId } = location.state;
+
+  useEffect(() => {
+    if (bookingId) {
+      setBtnType("Update");
+    }
+  }, [bookingId]);
 
   const getTomorrowsDate = () => {
     const today = new Date();
@@ -29,6 +43,8 @@ const Schedule = () => {
   useEffect(() => {
     const fetchAllSeats = async () => {
       const res = await fetch(`/api1/flight/getFlightById/${flightId}`);
+      unauthorizedHandler(res, dispatch, navigate);
+
       const data = await res.json();
       setSeatCount(data.available_seats);
     };
@@ -48,8 +64,11 @@ const Schedule = () => {
           flightId,
         }),
       });
-      const data = await res.json();
 
+      unauthorizedHandler(res, dispatch, navigate);
+
+      const data = await res.json();
+      console.log(data);
       const bookedArr = data.map((ele) => ele.seat_no - 1);
       const finalArr = new Array(seatCount).fill(0);
       bookedArr.forEach((seatNo) => {
@@ -62,35 +81,47 @@ const Schedule = () => {
     };
 
     fetchBookedSeats();
-  }, [flightId, seatCount, lastInsertedId, choosenDate]);
+  }, [flightId, seatCount, lastInsertedId, choosenDate, bookingId]);
 
   const onSeatClicked = (e) => {
-    if (e.target.classList.contains("bg-red-400")) {
-      return;
-    }
-
     let target = e.target;
     while (target && !target.classList.contains("seat")) {
       target = target.parentElement;
     }
 
-    const seatId = parseInt(target.id, 10);
-    const updatedSeats = [...choosedSeats];
-
-    if (!updatedSeats.includes(seatId)) {
-      updatedSeats.push(seatId);
-    } else {
-      const index = updatedSeats.indexOf(seatId);
-      if (index !== -1) updatedSeats.splice(index, 1);
+    if (target.classList.contains("bg-red-400")) {
+      return;
     }
 
-    setChoosedSeats(updatedSeats);
+    const seatId = parseInt(target.id, 10);
+
+    if (btnType == "Book") {
+      const updatedSeats = [...choosedSeats];
+
+      if (!updatedSeats.includes(seatId)) {
+        updatedSeats.push(seatId);
+      } else {
+        const index = updatedSeats.indexOf(seatId);
+        if (index !== -1) updatedSeats.splice(index, 1);
+      }
+      setChoosedSeats(updatedSeats);
+    } else {
+      setChoosedSeats([seatId]);
+    }
   };
+
+  useEffect(() => {
+    if (choosedSeats.length) {
+      setDateActive(false);
+    } else {
+      setDateActive(true);
+    }
+  }, [choosedSeats]);
 
   useEffect(() => {
     setTomorrowsDate(getTomorrowsDate());
     setChoosenDate(tomorrowsDate);
-  }, [choosedSeats]);
+  }, []);
 
   const onDateChange = (e) => {
     const tomDate = new Date(getTomorrowsDate());
@@ -107,23 +138,41 @@ const Schedule = () => {
   };
 
   const onBookClicked = async () => {
+    console.log(choosenDate);
     if (choosedSeats.length) {
-      const res = await fetch("/api1/booking/new", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          date: choosenDate,
-          userId: currentUser._id,
-          flightId,
-          seatNoArr: choosedSeats,
-        }),
-      });
+      let res = "";
+      if (btnType == "Book") {
+        res = await fetch("/api1/booking/new", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            date: choosenDate || getTomorrowsDate(),
+            userId: currentUser._id,
+            flightId,
+            seatNoArr: choosedSeats,
+          }),
+        });
+      } else {
+        res = await fetch(`/api1/booking/update`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            bookingId,
+            seatNo: choosedSeats[0],
+            date: choosenDate || getTomorrowsDate(),
+          }),
+        });
+      }
 
+      unauthorizedHandler(res, dispatch, navigate);
+      console.log(res);
       if (!res.ok) {
         return setNotification({
-          message: "A seat already booked, choose different one",
+          message: "The seat already booked, choose different one",
           status: "failure",
         });
       }
@@ -136,9 +185,11 @@ const Schedule = () => {
         message: "Booking Succesful",
         status: "success",
       });
+
+      navigate("/ManageBookings");
     } else {
-      setNotification({
-        message: "Please choose atleast one seat",
+      return setNotification({
+        message: "Choose a seat",
         status: "failure",
       });
     }
@@ -150,39 +201,28 @@ const Schedule = () => {
       <div className="flex justify-center">
         <input
           type="date"
+          disabled={!dateActive}
           defaultValue={tomorrowsDate}
           onChange={(e) => onDateChange(e)}
-          className="bg-transparent text-white text-xl px-5 py-2 focus:outline-none cursor-pointer rounded-md border border-white "
+          className="bg-transparent text-white text-xl px-5 py-2 focus:outline-none cursor-pointer rounded-md border border-white disabled:opacity-35 disabled:cursor-not-allowed"
         />
       </div>
       <div className="my-6 px-4">
-        {bookedSeats.map((status, ind) => {
-          return (
-            <div
-              key={ind}
-              id={ind}
-              className={`seat size-16 mx-1 my-1 inline-block relative rounded-md ${
-                status === 0 ? "bg-white/70  cursor-pointer" : "bg-red-400"
-              }`}
-              onClick={onSeatClicked}
-              style={{
-                backgroundColor: choosedSeats.includes(ind)
-                  ? "rgba(17,94,89,0.5)"
-                  : "",
-              }}
-            >
-              <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-bold">
-                {ind + 1}
-              </p>
-            </div>
-          );
-        })}
+        {bookedSeats.map((status, ind) => (
+          <Seat
+            status={status}
+            ind={ind}
+            key={ind}
+            onSeatClicked={onSeatClicked}
+            choosedSeats={choosedSeats}
+          />
+        ))}
       </div>
 
       <div className="flex justify-center">
         <input
           type="button"
-          value="Book"
+          value={btnType}
           className="w-40 rounded-md px-3 py-2 text-xl focus:outline-none bg-teal-800 text-white hover:bg-teal-700 transition-colors cursor-pointer"
           onClick={onBookClicked}
         />
