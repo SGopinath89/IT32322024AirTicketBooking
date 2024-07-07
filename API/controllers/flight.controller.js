@@ -45,7 +45,10 @@ export const createFlight = async (req, res, next) => {
     arrival_time,
     fare,
     available_seats,
+    photo,
   } = req.body;
+
+  console.log(photo);
 
   try {
     const newFlight = new Flight({
@@ -56,6 +59,7 @@ export const createFlight = async (req, res, next) => {
       arrival_time,
       fare,
       available_seats,
+      photo,
     });
 
     await newFlight.save();
