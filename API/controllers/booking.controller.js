@@ -22,24 +22,29 @@ export const getBookedSeats = async (req, res, next) => {
 export const makeBooking = async (req, res, next) => {
   let { userId, flightId, date, seatNoArr } = req.body;
   let isBooked = false;
+
   try {
-    flightId = new ObjectId(flightId);
+    if (req.user.id == userId) {
+      flightId = new ObjectId(flightId);
 
-    for (let i = 0; i < seatNoArr.length; i++) {
-      const thatAlreadyBookedSeat = await Booking.findOne({
-        flight_id: flightId,
-        date,
-        seat_no: seatNoArr[i] + 1,
-      });
+      for (let i = 0; i < seatNoArr.length; i++) {
+        const thatAlreadyBookedSeat = await Booking.findOne({
+          flight_id: flightId,
+          date,
+          seat_no: seatNoArr[i] + 1,
+        });
 
-      if (thatAlreadyBookedSeat) {
-        isBooked = true;
-        console.log("try block");
-        res
-          .status(403)
-          .json(JSON.stringify({ message: "already booked seat" }));
-        break;
+        if (thatAlreadyBookedSeat) {
+          isBooked = true;
+          console.log("try block");
+          res
+            .status(403)
+            .json(JSON.stringify({ message: "already booked seat" }));
+          break;
+        }
       }
+    } else {
+      return next("You cannot make booking others account");
     }
   } catch (error) {
     isBooked = true;
