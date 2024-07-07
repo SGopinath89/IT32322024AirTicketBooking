@@ -5,7 +5,6 @@ import cookieParser from "cookie-parser";
 
 import flightRouter from "./routes/flight.router.js";
 import authRouter from "./routes/auth.router.js";
-import userRouter from "./routes/user.router.js";
 import bookingRouter from "./routes/booking.router.js";
 dotenv.config();
 
@@ -26,7 +25,6 @@ mongoose
 
 app.use("/api1/flight", flightRouter);
 app.use("/api1/auth", authRouter);
-app.use("/api1/user", userRouter);
 app.use("/api1/booking", bookingRouter);
 
 app.use((err, req, res, next) => {
